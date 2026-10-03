@@ -1,0 +1,91 @@
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: None
+AllowShortNamespacesOnASingleLine: false
+
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+AlignAfterOpenBracket: DontAlign
+AlignOperands: DontAlign
+
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  BeforeLambdaBody: true
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+
+BreakConstructorInitializers: AfterColon
+InsertBraces: true
+
+ColumnLimit: 120
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 4
+IndentWidth: 2
+InsertNewlineAtEOF: true
+MaxEmptyLinesToKeep: 1
+LineEnding: LF
+
+DerivePointerAlignment: true
+PointerAlignment: Middle
+ReferenceAlignment: Pointer
+
+IndentCaseBlocks: false
+IndentCaseLabels: false
+
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Leave
+KeepEmptyLines:
+  AtEndOfFile: true
+  AtStartOfBlock: false
+
+IncludeBlocks: Merge
+IncludeCategories:
+  - Regex: '<[[:alnum:].]+>'
+    Priority: 1
+  - Regex: '<.*\.h|hpp>'
+    Priority: 2
+    SortPriority: 1
+  - Regex: '".*\.h|hpp"'
+    Priority: 2
+    SortPriority: 2
+SortIncludes: false
+
+NamespaceIndentation: All
+
+PackConstructorInitializers: Never
+
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterFunctionDeclarationName: false
+  AfterFunctionDefinitionName: false
+  AfterOverloadedOperator: false
+  BeforeNonEmptyParentheses: false
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyParentheses: false
+SpacesInAngles: Always
+SpacesInContainerLiterals: false
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InConditionalStatements: false
+  InCStyleCasts: false
+  InEmptyParentheses: false
+
+BreakInheritanceList: AfterColon
+BreakTemplateDeclarations: Yes
+IndentAccessModifiers: false
+SpaceAfterTemplateKeyword: false
+QualifierAlignment: Leave
+
+FixNamespaceComments: false
+RemoveParentheses: ReturnStatement

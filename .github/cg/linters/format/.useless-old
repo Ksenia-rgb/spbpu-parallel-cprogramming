@@ -1,0 +1,105 @@
+++AllowAllArgumentsOnNextLine: false
+++AllowAllParametersOfDeclarationOnNextLine: false
+++AllowShortBlocksOnASingleLine: Never (default)
+++AllowShortCaseLabelsOnASingleLine: false (default)
+++AllowShortFunctionsOnASingleLine: None
+++AllowShortIfStatementsOnASingleLine: Never (default)
+++AllowShortNamespacesOnASingleLine: false (default)
+++AllowShortLambdasOnASingleLine: None
+++AllowShortLoopsOnASingleLine: false (default)
+
+++AlignAfterOpenBracket: DontAlign
+++AlignOperands: DontAlign
+
+BinPackArguments: true
+BinPackParameters: BinPack
+
+BitFieldColonSpacing: After
+
+++BreakBeforeBinaryOperators: NonAssignment
+++BreakConstructorInitializers: AfterColon
++BreakInheritanceList: AfterColon
++BreakTemplateDeclarations: Yes
+
+++ColumnLimit: 110
+CompactNamespaces: false
+++ConstructorInitializerIndentWidth: 2
+++ContinuationIndentWidth: 2
+Cpp11BracedListStyle: true
+
+++DerivePointerAlignment: true
+++PointerAlignment: Middle
+++ReferenceAlignment: Pointer
+
+++EmptyLineAfterAccessModifier: Never
+++EmptyLineBeforeAccessModifier: Leave
+
++FixNamespaceComments: false
+
+++IncludeBlocks: Regroup
+++IncludeCategories:
+  - Regex: '<[[:alnum:].]+>'
+    Priority: 1
+  - Regex: '<.*\.h|hpp>'
+    Priority: 2
+    SortPriority: 1
+  - Regex: '".*\.h|hpp"'
+    Priority: 2
+    SortPriority: 2
+
++IndentAccessModifiers: false
+++IndentCaseBlocks: false (default)
+++IndentCaseLabels: false (default)
+IndentExternBlock: AfterExternBlock
+++IndentWidth: 2
+++InsertBraces: true
+++InsertNewlineAtEOF: true
+
+++KeepEmptyLines:
+  AtEndOfFile: true
+  AtStartOfBlock: false
+
+LambdaBodyIndentation: Signature (default)
+
+++LineEnding: LF
+
+++MaxEmptyLinesToKeep: 1
+
+++NamespaceIndentation: All
+
+++PackConstructorInitializers: Never
+
+RemoveBracesLLVM: false
+++RemoveParentheses: ReturnStatement
+
+SeparateDefinitionBlocks: Leave
+
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
++SpaceAfterTemplateKeyword: false
+SpaceAroundPointerQualifiers: Default
+
+++SpaceBeforeAssignmentOperators: true
+++SpaceBeforeCaseColon: false (default)
+SpaceBeforeCpp11BracedList: false
+++SpaceBeforeCtorInitializerColon: false
+++SpaceBeforeInheritanceColon: false
+
+++SpaceBeforeParens: Custom
+++SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterFunctionDeclarationName: false
+  AfterFunctionDefinitionName: false
+  AfterOverloadedOperator: false
+  BeforeNonEmptyParentheses: false
+
+++SpaceBeforeRangeBasedForLoopColon: true
+++SpaceBeforeSquareBrackets: false
+++SpaceInEmptyParentheses: false
+++SpacesInAngles: Always
+SpacesInCStyleCastParentheses: false (deprecated)
+SpacesInConditionalStatement: false (deprecated)
+++SpacesInContainerLiterals: false
+SpacesInParentheses: false (deprecated)
+SpacesInSquareBrackets: false (deprecated)
+
