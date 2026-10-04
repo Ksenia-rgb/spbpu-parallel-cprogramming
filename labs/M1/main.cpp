@@ -5,28 +5,40 @@
 #include <future>
 #include "monte-carlo.hpp"
 
+namespace
+{
+  double countSquare(double min_x, double max_x, double min_y, double max_y, size_t points, size_t tries)
+  {
+    return (max_x - min_x) * (max_y - min_y) * (points * 1.0 / tries);
+  }
+}
+
 int main(int argc, char** argv)
 {
-  if (argc != 3 || argc != 4)
+  if (argc != 3 && argc != 4)
   {
-    std::cerr << "Error: incorrect arguments count\n";
+    std::cerr << "Error: incorrect arguments count: " << argc << '\n';
     return 1;
   }
 
-  long long int threads = 0, tries = 0, seed_begin = 0;
+  size_t threads = 0, tries = 0, seed_begin = 0;
   try
   {
-    threads = std::strtoll(argv[1], nullptr, 10);
-    tries = std::strtoll(argv[2], nullptr, 10);
+    long long int threads_signed = 0, tries_signed = 0, seed_begin_signed = 0;
+    threads_signed = std::strtoll(argv[1], nullptr, 10);
+    tries_signed = std::strtoll(argv[2], nullptr, 10);
     if (argc == 4)
     {
-      seed_begin = std::strtoll(argv[3], nullptr, 10);
+      seed_begin_signed = std::strtoll(argv[3], nullptr, 10);
     }
-    if (tries <= 0 || threads < 0 || seed_begin < 0)
+    if (tries_signed <= 0 || threads_signed < 0 || seed_begin_signed < 0)
     {
       std::cerr << "Error: incorrect arguments\n";
       return 1;
     }
+    threads = threads_signed;
+    tries = tries_signed;
+    seed_begin = seed_begin_signed;
   }
   catch (const std::exception& e)
   {
@@ -35,19 +47,15 @@ int main(int argc, char** argv)
   }
 
   std::vector< rgb::circle_t > circles;
-  while (std::cin.eof())
+  rgb::circle_t circle;
+  while (std::cin >> circle)
   {
-    rgb::circle_t circle;
-    std::cin >> circle;
-    if (std::cin.fail() && std::cin.eof())
-    {
-      std::cin.clear();
-      std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
-    }
-    if (std::cin)
-    {
-      circles.push_back(circle);
-    }
+    circles.push_back(circle);
+  }
+  if (!std::cin.eof())
+  {
+    std::cerr << "Incorrect circles\n";
+    return 1;
   }
 
   double min_x = rgb::findMinX(circles), max_x = rgb::findMaxX(circles);
@@ -59,8 +67,8 @@ int main(int argc, char** argv)
   if (threads == 0)
   {
     rgb::answer_t res = rgb::calc(circles, tries, distrib(engine));
-    double square_union = (max_x - min_x) * (max_y - min_y) * (res.union_count * 1.0 / tries);
-    double square_inter = (res.union_count * 1.0 / tries); // TODO INTER NEED FRAME
+    double square_union = countSquare(min_x, max_x, min_y, max_y, res.union_count, tries);
+    double square_inter = countSquare(min_x, max_x, min_y, max_y, res.inter_count, tries);
     std::cout << square_union << ' ' << square_inter << '\n';
     return 0;
   }
@@ -96,8 +104,9 @@ int main(int argc, char** argv)
 
   size_t success_points_union = std::accumulate(results_union.begin(), results_union.end(), 0);
   size_t success_points_inter = std::accumulate(results_inter.begin(), results_inter.end(), 0);
-  double square_union = (max_x - min_x) * (max_y - min_y) * (success_points_union * 1.0 / tries);
-  double square_inter = (success_points_inter * 1.0 / tries); // TODO INTER NEED FRAME
+
+  double square_union = countSquare(min_x, max_x, min_y, max_y, success_points_union, tries);
+  double square_inter = countSquare(min_x, max_x, min_y, max_y, success_points_inter, tries);
 
   std::cout << square_union << ' ' << square_inter << '\n';
   return 0;

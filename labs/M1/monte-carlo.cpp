@@ -47,6 +47,10 @@ bool rgb::isInsideInter(const point_t& point, const std::vector< circle_t >& cir
 
 double rgb::findMinX(const std::vector< circle_t >& circles)
 {
+  if (circles.size() == 0)
+  {
+    return 0;
+  }
   double min = circles[0].center.x - circles[0].r;
   for (size_t i = 1; i < circles.size(); i++)
   {
@@ -57,6 +61,10 @@ double rgb::findMinX(const std::vector< circle_t >& circles)
 
 double rgb::findMaxX(const std::vector< circle_t >& circles)
 {
+  if (circles.size() == 0)
+  {
+    return 0;
+  }
   double max = circles[0].center.x + circles[0].r;
   for (size_t i = 1; i < circles.size(); i++)
   {
@@ -67,6 +75,10 @@ double rgb::findMaxX(const std::vector< circle_t >& circles)
 
 double rgb::findMinY(const std::vector< circle_t >& circles)
 {
+  if (circles.size() == 0)
+  {
+    return 0;
+  }
   double min = circles[0].center.y - circles[0].r;
   for (size_t i = 1; i < circles.size(); i++)
   {
@@ -77,6 +89,10 @@ double rgb::findMinY(const std::vector< circle_t >& circles)
 
 double rgb::findMaxY(const std::vector< circle_t >& circles)
 {
+  if (circles.size() == 0)
+  {
+    return 0;
+  }
   double max = circles[0].center.y + circles[0].r;
   for (size_t i = 1; i < circles.size(); i++)
   {
@@ -88,8 +104,8 @@ double rgb::findMaxY(const std::vector< circle_t >& circles)
 rgb::answer_t rgb::calc(const std::vector< circle_t >& circles, size_t tests, size_t seed)
 {
   std::default_random_engine engine(seed);
-  std::uniform_real_distribution<> distrib_union_x(findMinX(circles), findMaxX(circles));
-  std::uniform_real_distribution<> distrib_union_y(findMinY(circles), findMaxY(circles));
+  std::uniform_real_distribution<> distrib_x(findMinX(circles), findMaxX(circles));
+  std::uniform_real_distribution<> distrib_y(findMinY(circles), findMaxY(circles));
   std::uniform_real_distribution<> distrib_inter_x; // TODO: INTER NEED FOR FRAME
   std::uniform_real_distribution<> distrib_inter_y; // TODO: INTER NEED FOR FRAME
 
@@ -97,16 +113,14 @@ rgb::answer_t rgb::calc(const std::vector< circle_t >& circles, size_t tests, si
   size_t success_inter = 0;
   for (size_t i = 0; i < tests; ++i)
   {
-    double x_union = distrib_union_x(engine);
-    double y_union = distrib_union_y(engine);
-    if (isInsideUnion({x_union, y_union}, circles))
+    double x = distrib_x(engine);
+    double y = distrib_y(engine);
+    if (isInsideUnion({x, y}, circles))
     {
       ++success_union;
     }
 
-    double x_inter = distrib_inter_x(engine);
-    double y_inter = distrib_inter_y(engine);
-    if (isInsideInter({x_inter, y_inter}, circles))
+    if (isInsideInter({x, y}, circles))
     {
       ++success_inter;
     }
