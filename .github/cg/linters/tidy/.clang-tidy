@@ -60,11 +60,20 @@ CheckOptions:
   - key: readability-identifier-naming.ValueTemplateParameterCase
     value: CamelCase
 
+  - key: readability-identifier-naming.LocalConstantIgnoredRegexp
+    value: "[A-Z][A-Z0-9_]*"
+  - key: readability-identifier-naming.GlobalConstantIgnoredRegexp
+    value: "[A-Z][A-Z0-9_]*"
+  - key: readability-identifier-naming.ConstexprVariableIgnoredRegexp
+    value: "[A-Z][A-Z0-9_]*"
+  - key: readability-identifier-naming.ClassConstantIgnoredRegexp
+    value: "[A-Z][A-Z0-9_]*"
+
   - key: modernize-use-using.CheckFirstDeclaration
     value: true
 
   - key:  readability-magic-numbers.IgnoredIntegerValues
-    value:  '0;1'
+    value:  '0;1;2;3;4;10'
 
   - key: cppcoreguidelines-avoid-non-const-global-variables.AllowInternalLinkage
     value: true
