@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <limits>
+#include <cstddef>
 #include <random>
 #include <future>
+#include <thread>
 #include "monte-carlo.hpp"
 
 namespace
@@ -58,22 +59,22 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  double min_x = rgb::findMinX(circles), max_x = rgb::findMaxX(circles);
-  double min_y = rgb::findMinY(circles), max_y = rgb::findMaxY(circles);
+  const double min_x = rgb::findMinX(circles), max_x = rgb::findMaxX(circles);
+  const double min_y = rgb::findMinY(circles), max_y = rgb::findMaxY(circles);
 
   std::default_random_engine engine(seed_begin);
   std::uniform_real_distribution<> distrib;
 
   if (threads == 0)
   {
-    rgb::answer_t res = rgb::calc(circles, tries, distrib(engine));
-    double square_union = countSquare(min_x, max_x, min_y, max_y, res.union_count, tries);
-    double square_inter = countSquare(min_x, max_x, min_y, max_y, res.inter_count, tries);
+    const rgb::answer_t res = rgb::calc(circles, tries, distrib(engine));
+    const double square_union = countSquare(min_x, max_x, min_y, max_y, res.union_count, tries);
+    const double square_inter = countSquare(min_x, max_x, min_y, max_y, res.inter_count, tries);
     std::cout << square_union << ' ' << square_inter << '\n';
     return 0;
   }
 
-  size_t max_threads = std::thread::hardware_concurrency();
+  const size_t max_threads = std::thread::hardware_concurrency();
   if (threads > max_threads)
   {
     threads = max_threads;
@@ -105,8 +106,8 @@ int main(int argc, char** argv)
   size_t success_points_union = std::accumulate(results_union.begin(), results_union.end(), 0);
   size_t success_points_inter = std::accumulate(results_inter.begin(), results_inter.end(), 0);
 
-  double square_union = countSquare(min_x, max_x, min_y, max_y, success_points_union, tries);
-  double square_inter = countSquare(min_x, max_x, min_y, max_y, success_points_inter, tries);
+  const double square_union = countSquare(min_x, max_x, min_y, max_y, success_points_union, tries);
+  const double square_inter = countSquare(min_x, max_x, min_y, max_y, success_points_inter, tries);
 
   std::cout << square_union << ' ' << square_inter << '\n';
   return 0;

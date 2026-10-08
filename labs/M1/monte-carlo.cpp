@@ -106,8 +106,6 @@ rgb::answer_t rgb::calc(const std::vector< circle_t >& circles, size_t tests, si
   std::default_random_engine engine(seed);
   std::uniform_real_distribution<> distrib_x(findMinX(circles), findMaxX(circles));
   std::uniform_real_distribution<> distrib_y(findMinY(circles), findMaxY(circles));
-  std::uniform_real_distribution<> distrib_inter_x; // TODO: INTER NEED FOR FRAME
-  std::uniform_real_distribution<> distrib_inter_y; // TODO: INTER NEED FOR FRAME
 
   size_t success_union = 0;
   size_t success_inter = 0;
