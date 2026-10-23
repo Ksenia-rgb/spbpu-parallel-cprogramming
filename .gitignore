@@ -2,3 +2,5 @@
 .boost_location
 # Built files
 out
+# In / output files
+*.txt
